@@ -18,15 +18,12 @@ public class Farmacia {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        //Año: La clase Date cuenta los años desde 1900. Si ingresas 2025,
-        //lo interpreta como 1900 + 2025 = 3925
-
-        //Mes: Los meses van de 0 a 11 (0 = Enero, 11 = Diciembre)
-        //Si ingresas 10, lo interpreta como Noviembre
+    public static void main(String[] args) {        
         Scanner scanner = new Scanner(System.in);
         int opcion = 0;
         boolean entradaValida;
+        Medicamento medicamento = null;//Con esto me aseguro que en el paso 2 no
+        //se puede usar al ser nulo
         
         do{
         
@@ -67,7 +64,7 @@ public class Farmacia {
                         int anio = scanner.nextInt();                        
                         
                         Date fechaCaducidad = new Date(anio-1900,mes-1,dia);                       
-                        Medicamento medicamento = new Medicamento(nombre, precio, stock, fechaCaducidad);
+                        medicamento = new Medicamento(nombre, precio, stock, fechaCaducidad);
                         System.out.println("Medicamento ingresado satisfactoriamente");
                         System.out.println("--------");
                         System.out.println("Nombre: " + medicamento.getNombre());
@@ -76,7 +73,13 @@ public class Farmacia {
                         System.out.println("--------");
                         break;
                     case 2:
-                        System.out.println("Ha ingresado la opcion 2");
+                        if(medicamento != null){
+                            System.out.println("Nombre: " + medicamento.getNombre());
+                            System.out.println("Precio: " + medicamento.getPrecio());
+                            System.out.println("Stock: " + medicamento.getStock());
+                        }else{
+                            System.out.println("Primero debes crear un medicamento");
+                        }
                         break;
                     case 3:
                         System.out.println("Ha salido del programa adios");
